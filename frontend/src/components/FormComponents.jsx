@@ -6,12 +6,17 @@ export default function FormComponents({ formTitle, apiComment }) {
   const [name, setName] = useState("");
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
+  const [err, setErr] = useState("");
   const navigate = useNavigate();
+
+  // edit and delete
   const { id } = useParams();
 
+  // edit post default value
   const [editPost, setEditPost] = useState(null);
 
   useEffect(() => {
+    // Get one post for edit
     GetPosts().then((res) => {
       res.map((data) => {
         if (data.id == id) {
@@ -21,23 +26,46 @@ export default function FormComponents({ formTitle, apiComment }) {
     });
   }, [id, editPost]);
 
+  // validation
+  const validation = (errMsg) => {
+    setErr(errMsg);
+  };
+
   // form submit handle
   const formSubmitHandle = (e) => {
     e.preventDefault();
-    if (apiComment == "AddPosts") {
-      AddPosts(e.target);
-      navigate("/");
-    } else if (apiComment == "EditPosts") {
-      EditPost(id, e.target);
-      navigate("/");
+    if ((name && title && content) || (editPost)) {
+      // for add new post
+      if (apiComment == "AddPosts") {
+        AddPosts(e.target);
+        navigate("/");
+      }
+      // for edit post
+      else if (apiComment == "EditPosts") {
+        EditPost(id, e.target);
+        navigate("/");
+      }
+    } else {
+      if (!name) {
+        validation("name");
+      }
+      if (!title) {
+        validation("title");
+      }
+      if (!content) {
+        validation("content");
+      }
     }
   };
 
   return (
     <div className="bg-white mx-auto p-5 w-3/5 md:w-2/5 h-auto rounded-md">
+      {/* Form Title */}
       <h3 className="font-bold text-xl md:text-2xl text-center text-yellow-500 mb-3">
         {formTitle}
       </h3>
+
+      {/* Form */}
       <form
         action=""
         onSubmit={(e) => formSubmitHandle(e)}
@@ -47,7 +75,9 @@ export default function FormComponents({ formTitle, apiComment }) {
         <div>
           <label
             htmlFor="name"
-            className="block mb-2 text-sm font-medium text-red-700 dark:text-red-500"
+            className={`block mb-2 text-md font-medium ${
+              !name && err ? "text-red-700" : "text-black"
+            }`}
           >
             Your name
           </label>
@@ -57,13 +87,16 @@ export default function FormComponents({ formTitle, apiComment }) {
             name="name"
             placeholder="Enter Your Name"
             onChange={(e) => setName(e.target.value)}
-            defaultValue={editPost && editPost.name}
-            // value={name}
-            className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg  focus:border-red-500 block w-full p-2.5 outline-none"
+            defaultValue={editPost ? editPost.name : name}
+            className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
+              !name && err
+                ? "bg-red-50 border-red-500 placeholder-red-700"
+                : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
+            }`}
           />
-          {name && (
-            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-              <span className="font-medium">Oops!</span> Username already taken!
+          {!name && err && (
+            <p className="text-sm text-red-600 dark:text-red-500">
+              required name !!!
             </p>
           )}
         </div>
@@ -72,7 +105,9 @@ export default function FormComponents({ formTitle, apiComment }) {
         <div>
           <label
             htmlFor="title"
-            className="block mb-2 text-sm font-medium text-red-700 dark:text-red-500"
+            className={`block mb-2 text-md font-medium ${
+              !title && err ? "text-red-700" : "text-black"
+            }`}
           >
             Title
           </label>
@@ -82,12 +117,16 @@ export default function FormComponents({ formTitle, apiComment }) {
             name="title"
             placeholder="Enter Title"
             onChange={(e) => setTitle(e.target.value)}
-            defaultValue={editPost && editPost.title}
-            className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg  focus:border-red-500 block w-full p-2.5 outline-none"
+            defaultValue={editPost ? editPost.title : title}
+            className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
+              !title && err
+                ? "bg-red-50 border-red-500 placeholder-red-700"
+                : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
+            }`}
           />
-          {title && (
-            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-              <span className="font-medium">Oops!</span> Username already taken!
+          {!title && err && (
+            <p className="text-sm text-red-600 dark:text-red-500">
+              required title !!!
             </p>
           )}
         </div>
@@ -96,7 +135,9 @@ export default function FormComponents({ formTitle, apiComment }) {
         <div>
           <label
             htmlFor="content"
-            className="block mb-2 text-sm font-medium text-red-700 dark:text-red-500"
+            className={`block mb-2 text-md font-medium ${
+              !content && err ? "text-red-700" : "text-black"
+            }`}
           >
             Content
           </label>
@@ -106,13 +147,17 @@ export default function FormComponents({ formTitle, apiComment }) {
             rows="4"
             placeholder="Enter Content"
             onChange={(e) => setContent(e.target.value)}
-            defaultValue={editPost && editPost.content}
-            className="bg-red-50 border border-red-500 text-red-900 placeholder-red-700 text-sm rounded-lg  focus:border-red-500 block w-full p-2.5 outline-none"
+            defaultValue={editPost ? editPost.content : content}
+            className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
+              !content && err
+                ? "bg-red-50 border-red-500 placeholder-red-700"
+                : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
+            }`}
           ></textarea>
 
-          {content && (
-            <p className="mt-2 text-sm text-red-600 dark:text-red-500">
-              <span className="font-medium">Oops!</span> Username already taken!
+          {!content && err && (
+            <p className="text-sm text-red-600 dark:text-red-500">
+              required content !!!
             </p>
           )}
         </div>
