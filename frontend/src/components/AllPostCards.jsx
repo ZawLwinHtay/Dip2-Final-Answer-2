@@ -23,11 +23,11 @@ export default function AllPostCards() {
             <div className="flex items-start justify-between">
               {/* card left */}
               <div>
-                <h2 className="mb-2 font-bold text-xl md:text-3xl">
+                <h2 className="mb-2 font-bold text-xl md:text-3xl text-yellow-400">
                   {post.name}
                 </h2>
                 <div className="flex items-center gap-3">
-                  <h3 className="text-yellow-500 text-xl font-semibold">
+                  <h3 className="text-gray-500 text-md md:text-xl font-semibold">
                     {post.title}
                   </h3>
                   <p className="text-xs bg-yellow-400 px-3 py-1.5 text-white font-semibold">
