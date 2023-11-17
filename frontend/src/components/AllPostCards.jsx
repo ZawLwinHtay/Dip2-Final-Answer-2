@@ -20,7 +20,7 @@ export default function AllPostCards() {
             className="md:w-3/5 mx-auto bg-white p-5 my-3 rounded-lg"
           >
             {/* card header */}
-            <div className="flex items-start justify-between">
+            <div className="flex items-start justify-between relative">
               {/* card left */}
               <div>
                 <h2 className="mb-2 font-bold text-xl md:text-3xl text-yellow-400">
@@ -40,18 +40,18 @@ export default function AllPostCards() {
               <div className="flex gap-3 items-center">
                 <Link
                   to={`/edit/${post.id}`}
-                  className="bg-yellow-400 p-1 rounded-md text-white cursor-pointer"
+                  className="bg-yellow-400 p-1 mr-5 rounded-md text-white cursor-pointer"
                 >
                   <PencilSquareIcon className="w-6 h-6" />
                 </Link>
-                <div onClick={()=>DeletePost(post.id)} className="cursor-pointer">
-                  <XMarkIcon className="w-8 h-8" />
+                <div onClick={()=>DeletePost(post.id)} className="cursor-pointer absolute -top-5 -right-5 bg-yellow-400 rounded-tr-md rounded-bl-lg p-1">
+                  <XMarkIcon className="w-5 h-5" />
                 </div>
               </div>
             </div>
 
             {/* card body */}
-            <p className="text-xs md:text-sm text-[#9e9e9e] text-justify">
+            <p className="mt-2 text-xs md:text-sm text-[#9e9e9e] text-justify">
               {post.content}
             </p>
           </div>

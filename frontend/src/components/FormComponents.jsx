@@ -49,11 +49,15 @@ export default function FormComponents({ formTitle, apiComment }) {
         }
       } else {
         if (title.length > 50) {
-          setInputErr(`Title maximum legth is 50. (Current length ${title.length})`);
-        } 
+          setInputErr(
+            `Title maximum legth is 50. (Current length ${title.length})`
+          );
+        }
         if (name.length > 50) {
-          setInputErr(`Name maximum legth is 50. (Current length ${name.length})`);
-        } 
+          setInputErr(
+            `Name maximum legth is 50. (Current length ${name.length})`
+          );
+        }
         if (content.length > 255) {
           setInputErr(
             `Content maximum legth is 255. (Current length ${content.length})`
@@ -68,7 +72,11 @@ export default function FormComponents({ formTitle, apiComment }) {
   return (
     <div className="bg-white mx-auto p-5 w-4/5 md:w-2/5 h-auto rounded-md relative">
       {/* maximum legth error */}
-      <div className={` absolute left-0 w-full ${InputErr ? 'top-0' : '-top-20'} duration-200`}>
+      <div
+        className={` absolute left-0 w-full ${
+          InputErr ? "top-0" : "-top-20"
+        } duration-200`}
+      >
         {title && name && content && InputErr && (
           <div
             id="alert-border-2"
@@ -90,7 +98,7 @@ export default function FormComponents({ formTitle, apiComment }) {
               type="button"
               data-dismiss-target="#alert-border-2"
               aria-label="Close"
-              onClick={()=>setInputErr("")}
+              onClick={() => setInputErr("")}
             >
               <span className="sr-only">Dismiss</span>
               <svg
@@ -131,19 +139,24 @@ export default function FormComponents({ formTitle, apiComment }) {
           >
             Your name
           </label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            placeholder="Enter Your Name"
-            onChange={(e) => setName(e.target.value)}
-            value={name}
-            className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
-              !name && err
-                ? "bg-red-50 border-red-500 placeholder-red-700"
-                : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
-            }`}
-          />
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              id="name"
+              name="name"
+              placeholder="Enter Your Name"
+              onChange={(e) => setName(e.target.value)}
+              value={name}
+              className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
+                !name && err
+                  ? "bg-red-50 border-red-500 placeholder-red-700"
+                  : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
+              }`}
+            />
+            <p className="bg-yellow-400 p-2.5 rounded-md text-sm text-white font-semibold text-center w-11">
+              {name.length}
+            </p>
+          </div>
           {!name && err && (
             <p className="text-sm text-red-600 dark:text-red-500">
               required name !!!
@@ -161,19 +174,25 @@ export default function FormComponents({ formTitle, apiComment }) {
           >
             Title
           </label>
-          <input
-            type="text"
-            id="title"
-            name="title"
-            placeholder="Enter Title"
-            onChange={(e) => setTitle(e.target.value)}
-            value={title}
-            className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
-              !title && err
-                ? "bg-red-50 border-red-500 placeholder-red-700"
-                : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
-            }`}
-          />
+          <div className="flex items-center gap-2">
+            <input
+              type="text"
+              id="title"
+              name="title"
+              placeholder="Enter Title"
+              onChange={(e) => setTitle(e.target.value)}
+              value={title}
+              className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
+                !title && err
+                  ? "bg-red-50 border-red-500 placeholder-red-700"
+                  : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
+              }`}
+            />
+            <p className="bg-yellow-400 p-2.5 rounded-md text-sm text-white font-semibold text-center w-11">
+              {title.length}
+            </p>
+          </div>
+
           {!title && err && (
             <p className="text-sm text-red-600 dark:text-red-500">
               required title !!!
@@ -191,19 +210,24 @@ export default function FormComponents({ formTitle, apiComment }) {
           >
             Content
           </label>
-          <textarea
-            id="content"
-            name="content"
-            rows="4"
-            placeholder="Enter Content"
-            onChange={(e) => setContent(e.target.value)}
-            value={content}
-            className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
-              !content && err
-                ? "bg-red-50 border-red-500 placeholder-red-700"
-                : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
-            }`}
-          ></textarea>
+          <div className="flex gap-2">
+            <textarea
+              id="content"
+              name="content"
+              rows="4"
+              placeholder="Enter Content"
+              onChange={(e) => setContent(e.target.value)}
+              value={content}
+              className={`border text-sm rounded-lg block w-full p-2.5 outline-none text-yellow-500 ${
+                !content && err
+                  ? "bg-red-50 border-red-500 placeholder-red-700"
+                  : "bg-yellow-50 placeholder-yellow-200 border-yellow-500"
+              }`}
+            ></textarea>
+            <p className="bg-yellow-400 p-2.5 rounded-md text-sm text-white font-semibold flex items-center justify-center w-11">
+              {content.length}
+            </p>
+          </div>
 
           {!content && err && (
             <p className="text-sm text-red-600 dark:text-red-500">

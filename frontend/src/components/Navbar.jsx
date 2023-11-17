@@ -8,7 +8,7 @@ export default function Navbar() {
       </div>
       <div className="flex items-center justify-between px-5">
         {/* Logo */}
-        <h2 className=" font-bold text-sm md:text-2xl">
+        <h2 className=" font-bold text-sm md:text-2xl text-yellow-600">
           YOUR<span className="text-xs md:text-sm text-white">.POST</span>
         </h2>
 
