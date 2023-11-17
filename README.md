@@ -1,14 +1,14 @@
 
-cmd run path   ```/DIP-AssignMentAnswer-2/```
+cmd run path   ```.../DIP-AssignMentAnswer-2/```
 ``` python
 py -m venv env-name
 
-/env/Script/acitve
+./env/Scripts/acitve
 ```
 
 
 ## BackEnd
-cmd run path   ```/DIP-AssignMentAnswer-2/backend```
+cmd run path   ```.../DIP-AssignMentAnswer-2/backend```
 ### First run cmd
 ```python
 pip install django==4.2.7
@@ -22,7 +22,7 @@ pip install psycopg2
 
 ## Edit This Files
 
-### api_app folder
+### backend folder
 
 ###### Settings.py
 ```python
@@ -71,7 +71,7 @@ urlpatterns = [
 ]
 ```
 
-### backend folder
+### api_app folder
 
 ###### urls.py
 ```python
@@ -88,7 +88,16 @@ urlpatterns = [
 ]
 ```
 
+###### serializers.py
+```python
+from rest_framework import serializers
+from api_app.models import Posts
 
+class PostSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Posts
+        fields = ['id', 'name', 'title', 'content', 'date']
+```
 
 
 
@@ -121,7 +130,7 @@ DATABASES = {
 ```
 
 ### Run cmd
-cmd run path   ```/DIP-AssignMentAnswer-2/backend```
+cmd run path   ```.../DIP-AssignMentAnswer-2/backend```
 ```python
 python manage.py makemigrations
 
@@ -133,7 +142,11 @@ python manage.py runserver
 
 ## FrontEnd
 
-cmd run path   ```/DIP-AssignMentAnswer-2/frontend```
+cmd run path   ```.../DIP-AssignMentAnswer-2/frontend```
+
+```javascript
+npm install
+```
 
 ### Install Tailwindcss
 
